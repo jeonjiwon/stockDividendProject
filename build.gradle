@@ -24,6 +24,7 @@ dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	implementation 'org.jsoup:jsoup:1.15.3'
+	implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.3'
 	runtimeOnly 'com.h2database:h2'
 
 	compileOnly 'org.projectlombok:lombok'

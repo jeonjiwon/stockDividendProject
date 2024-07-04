@@ -24,9 +24,11 @@ public class CompanyController {
     /*
      * 자동검색 API
      */
-    @GetMapping("/autocomplete")
-    public ResponseEntity<?> autoComplete(@PathVariable String keyword) {
-        return null;
+    @GetMapping("/autocomplete/{keyword}")
+    public ResponseEntity<?> autoComplete(@PathVariable(value="keyword") String keyword) {
+//        var result = this.companyService.autoComplete(keyword);
+        var result = this.companyService.getCompanyNamesByKeyword(keyword);
+        return ResponseEntity.ok(result);
     }
 
     /*
@@ -43,12 +45,16 @@ public class CompanyController {
      * 회사 저장 API
      */
     @PostMapping
-    public ResponseEntity<?> adCompany(@RequestBody Company request) {
+    public ResponseEntity<?> addCompany(@RequestBody Company request) {
         String ticker = request.getTicker().trim();
         if(ObjectUtils.isEmpty(ticker)) {
             throw new RuntimeException("ticker is empty");
         }
         Company company = this.companyService.save(ticker);
+
+        // 회사를 저장할 때마다 트라이에 해당 정보 저장
+        this.companyService.addAutoCompleteKeyword(company.getName());
+
         return ResponseEntity.ok(company);
     }
 
