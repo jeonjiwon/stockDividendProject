@@ -19,6 +19,13 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+  redis:
+    host: localhost
+    port: 6379
+    cache-names: finance
+
+  jwt:
+    secret: c3ByaW5nLXN0b2NrZGl2aWRlbmQtcHJvamVjdC1qZW9uaml3b24taW5kaXZpZHVhbC1wcm9qZWN0LWhvbWV3b3JrLXRlc3Q=
 
 scheduler:
   scrap:
